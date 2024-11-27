@@ -28,10 +28,9 @@ impl Day {
     }
 
     pub fn read_input(&self) -> String {
-        let path = format!("input/input_{:0>2}.txt", self.number);
-        println!("{}", path);
-        fs::read_to_string(format!("input/input_{:0>2}.txt", self.number))
-            .expect("Failed to read input file.")
+        let path = fs::canonicalize(format!("input/input_{:0>2}.txt", self.number))
+            .expect("Problem with input file path:");
+        fs::read_to_string(path).expect("Failed to read input file:")
     }
 }
 
