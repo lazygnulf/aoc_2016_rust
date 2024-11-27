@@ -14,7 +14,7 @@ fn solve_part1(input: &str) -> String {
         vec![0, 1],  // South
         vec![-1, 0], // West
     ];
-    let mut current_dir = 0;
+    let mut current_dir = 0; // index in directions vector
     let mut pos = vec![0i32, 0i32];
 
     for cmd in input.split(", ") {
@@ -23,18 +23,10 @@ fn solve_part1(input: &str) -> String {
             .parse()
             .expect("Error parsing integer (steps):");
 
-        if turn == "R" {
-            if current_dir == 3 {
-                current_dir = 0;
-            } else {
-                current_dir += 1;
-            }
-        } else {
-            if current_dir == 0 {
-                current_dir = 3;
-            } else {
-                current_dir -= 1;
-            }
+        match turn {
+            "R" => current_dir = (current_dir + 1) % 4,
+            "L" => current_dir = (current_dir + 3) % 4,
+            _ => panic!("Invalid direction"),
         }
 
         pos[0] += directions[current_dir][0] * steps;
