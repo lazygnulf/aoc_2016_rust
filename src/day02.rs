@@ -8,20 +8,32 @@ pub fn get_day() -> Day {
 }
 
 fn solve_part1(input: &str) -> String {
-    let keypad = vec![".....", ".123.", ".456.", ".789.", "....."];
+    let keypad: Vec<Vec<char>> = vec![
+        ".....".chars().collect(),
+        ".123.".chars().collect(),
+        ".456.".chars().collect(),
+        ".789.".chars().collect(),
+        ".....".chars().collect(),
+    ];
 
     bathroom_code(input, &keypad, (2, 3))
 }
 
 fn solve_part2(input: &str) -> String {
-    let keypad = vec![
-        ".......", "...1...", "..234..", ".56789.", "..ABC..", "...D...", ".......",
+    let keypad: Vec<Vec<char>> = vec![
+        ".......".chars().collect(),
+        "...1...".chars().collect(),
+        "..234..".chars().collect(),
+        ".56789.".chars().collect(),
+        "..ABC..".chars().collect(),
+        "...D...".chars().collect(),
+        ".......".chars().collect(),
     ];
 
     bathroom_code(input, &keypad, (3, 1))
 }
 
-fn bathroom_code(input: &str, keypad: &Vec<&str>, start: (usize, usize)) -> String {
+fn bathroom_code(input: &str, keypad: &Vec<Vec<char>>, start: (usize, usize)) -> String {
     let mut bathroom_code = String::new();
 
     let mut pos_x = start.0;
@@ -38,12 +50,12 @@ fn bathroom_code(input: &str, keypad: &Vec<&str>, start: (usize, usize)) -> Stri
                 'R' => new_pos_y += 1,
                 _ => panic!("unknown command"),
             }
-            if keypad[new_pos_x].chars().nth(new_pos_y).unwrap() != '.' {
+            if keypad[new_pos_x][new_pos_y] != '.' {
                 pos_x = new_pos_x;
                 pos_y = new_pos_y;
             }
         }
-        bathroom_code.push(keypad[pos_x].chars().nth(pos_y).unwrap());
+        bathroom_code.push(keypad[pos_x][pos_y]);
     }
 
     bathroom_code
