@@ -10,7 +10,7 @@ pub fn get_day() -> Day {
 fn solve_part1(input: &str) -> String {
     let keypad = vec![".....", ".123.", ".456.", ".789.", "....."];
 
-    bathroom_code(input, &keypad, (2, 2))
+    bathroom_code(input, &keypad, (2, 3))
 }
 
 fn solve_part2(input: &str) -> String {
@@ -18,7 +18,7 @@ fn solve_part2(input: &str) -> String {
         ".......", "...1...", "..234..", ".56789.", "..ABC..", "...D...", ".......",
     ];
 
-    bathroom_code(input, &keypad, (2, 2))
+    bathroom_code(input, &keypad, (3, 1))
 }
 
 fn bathroom_code(input: &str, keypad: &Vec<&str>, start: (usize, usize)) -> String {
@@ -69,11 +69,15 @@ mod tests {
 
     #[test]
     fn test_part2_with_examples() {
-        assert_eq!(1 + 1, 2);
+        let input = r#"ULL
+            RRDDD
+            LURDL
+            UUUUD"#;
+        assert_eq!(solve_part2(&input), "5DB3");
     }
 
     #[test]
     fn test_part2_with_input() {
-        assert_eq!(solve_part2(&get_day().read_input()), "42");
+        assert_eq!(solve_part2(&get_day().read_input()), "D65C3");
     }
 }
