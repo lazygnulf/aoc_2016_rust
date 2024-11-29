@@ -12,12 +12,7 @@ fn solve_part1(input: &str) -> String {
 
     triangles = input.lines().map(|l| Triangle::new(l.trim())).collect();
 
-    let mut count = 0;
-    for t in triangles {
-        if t.possible() {
-            count += 1;
-        }
-    }
+    let count = triangles.iter().filter(|t| t.possible()).count();
 
     count.to_string()
 }
