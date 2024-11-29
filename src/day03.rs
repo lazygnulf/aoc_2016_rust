@@ -8,13 +8,12 @@ pub fn get_day() -> Day {
 }
 
 fn solve_part1(input: &str) -> String {
-    let triangles: Vec<Triangle>;
-
-    triangles = input.lines().map(|l| Triangle::new(l.trim())).collect();
-
-    let count = triangles.iter().filter(|t| t.possible()).count();
-
-    count.to_string()
+    input
+        .lines()
+        .map(|l| Triangle::new(l.trim()))
+        .filter(|t| t.possible())
+        .count()
+        .to_string()
 }
 
 #[derive(Debug)]
