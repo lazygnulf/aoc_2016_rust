@@ -90,6 +90,6 @@ mod tests {
 
     #[test]
     fn test_part2_with_input() {
-        //assert_eq!(solve_part2(&get_day().read_input()), "42");
+        assert_eq!(solve_part2(&get_day().read_input()), "111");
     }
 }

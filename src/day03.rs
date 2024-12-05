@@ -38,8 +38,41 @@ impl Triangle {
     }
 }
 
-fn solve_part2(_input: &str) -> String {
-    "42".to_string()
+fn solve_part2(input: &str) -> String {
+    parse_part2(&input)
+        .iter()
+        .filter(|t| t.possible())
+        .count()
+        .to_string()
+}
+
+fn parse_part2(input: &str) -> Vec<Triangle> {
+    let mut triangles = Vec::<Triangle>::new();
+
+    let numbers: Vec<Vec<u16>> = input
+        .lines()
+        .map(|l| l.split_whitespace().map(|n| n.parse().unwrap()).collect())
+        .collect();
+
+    if numbers.len() % 3 != 0 {
+        panic!("wrong number of lines");
+    }
+
+    let mut row = 0;
+    while row < numbers.len() {
+        for col in 0..3 {
+            let t = Triangle {
+                a: numbers[row][col],
+                b: numbers[row + 1][col],
+                c: numbers[row + 2][col],
+            };
+            triangles.push(t);
+        }
+
+        row += 3;
+    }
+
+    triangles
 }
 
 #[cfg(test)]
@@ -63,6 +96,6 @@ mod tests {
 
     #[test]
     fn test_part2_with_input() {
-        assert_eq!(solve_part2(&get_day().read_input()), "42");
+        assert_eq!(solve_part2(&get_day().read_input()), "1826");
     }
 }
